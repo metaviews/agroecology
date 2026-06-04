@@ -43,7 +43,7 @@ The wider fight is real: the January 2023 John Deere / American Farm Bureau MOU,
 
 The four "why M3" claims — domain translation, pedagogical scaffolding, sovereignty by design, customization at the edge — are walked through on the process page, with concrete "M3 said X, I changed it to Y, because Z" examples from the actual build. The "M3 vs owner" division of labor is the receipt, not a footnote.
 
-Built in collaboration between a farmer (agroecology, right to repair framing, pedagogical sequencing, real farm data) and **M3** (MiniMax-M3, a large language model from MiniMax, accessed via [Nous Research's portal](https://portal.nousresearch.com) at portal.nousresearch.com — synthesis, code, design scaffolding, illustration).
+Built in collaboration between a farmer (agroecology, right to repair framing, pedagogical sequencing, real farm data) and **M3** (MiniMax-M3, a large language model from MiniMax — synthesis, code, design scaffolding, illustration).
 
 **The site:** [URL — fill in after deploying]
 **The case study + working tool:** [URL/case-maintenance.html]

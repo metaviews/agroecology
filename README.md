@@ -4,7 +4,7 @@ A farmer, an AI coding partner (M3), and a right to repair ethos. Tools built en
 
 ## About M3
 
-M3 (MiniMax-M3) is a large language model from MiniMax, a foundation model company. It is accessed through [Nous Research's portal](https://portal.nousresearch.com) at portal.nousresearch.com, which provides the chat interface and tooling used to build this site. Large language models like M3 read and generate text and code in response to prompts; the *vibe coding* approach in this project uses M3 as a coding partner that takes a farmer's domain knowledge and turns it into working software artifacts.
+M3 (MiniMax-M3) is a large language model from MiniMax, a foundation model company. Large language models like M3 read and generate text and code in response to prompts; the *vibe coding* approach in this project uses M3 as a coding partner that takes a farmer's domain knowledge and turns it into working software artifacts.
 
 This site was submitted to the **M3 Showcase**, a community challenge for projects built with M3. The four "why M3" claims on this site — domain translation, pedagogical scaffolding, sovereignty by design, customization at the edge — are the submission's argument for what M3 specifically enables in agroecology and right to repair work.
 
@@ -90,7 +90,7 @@ The `process.html` page walks through each claim with concrete "M3 said X, I cha
 
 ## The build itself
 
-- **M3** (MiniMax-M3, accessed via [Nous Research's portal](https://portal.nousresearch.com) at portal.nousresearch.com) did the synthesis: scaffolded the site structure, drafted the case study and process text, built the JavaScript tool, generated the service interval and parts templates. M3 is a large language model from MiniMax; in this project it functioned as a coding partner taking the owner's domain knowledge and turning it into working software artifacts.
+- **M3** (MiniMax-M3) did the synthesis: scaffolded the site structure, drafted the case study and process text, built the JavaScript tool, generated the service interval and parts templates. M3 is a large language model from MiniMax; in this project it functioned as a coding partner taking the owner's domain knowledge and turning it into working software artifacts.
 - **The owner** did the editorial judgment, the agroecological and right to repair framing, the pedagogical sequencing, the real farm data (three machines from `~/farm-equipment/records/`), and the final "what this means" framing. The pushback on M3 outputs — visible in `process.html` — is the part that made the tool sharper than what M3 would have produced alone.
 
 ## Credits and sources
