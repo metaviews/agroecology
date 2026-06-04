@@ -175,6 +175,19 @@ nav a:hover, nav a:focus { text-decoration: underline; }
 }
 .claim strong { color: var(--color-terracotta); font-style: normal; }
 
+/* Hero image (banner at top of index.html) */
+.hero-image {
+  margin: 0 0 1.8rem 0;
+  border: var(--rule);
+  background: var(--color-cream);
+  padding: 0;
+}
+.hero-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Asymmetric grid for cards */
 .grid-asym {
   display: grid;
