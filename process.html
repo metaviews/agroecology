@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How it was built — Vibe Coding for Agroecology</title>
+  <meta name="description" content="The actual collaboration between a farmer and M3: what M3 drafted, what the owner changed, and why. The four 'why M3' claims, walked through with concrete build artifacts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="wide">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="masthead">
+      <span class="issue">Process</span> &nbsp;·&nbsp; M3 &amp; the owner &nbsp;·&nbsp; The build, the revisions, the why
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="case-maintenance.html">The Case</a></li>
+        <li><a href="process.html" aria-current="page">How it was built</a></li>
+        <li><a href="contribute.html">Build one for your farm</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h1>How it was built
+        <span class="subhead">What M3 drafted, what the owner changed, and why</span>
+      </h1>
+
+      <p class="lede">This page is the contest receipt. It makes visible the actual collaboration between a farmer and M3, with real pushback, real revisions, and a real agroecological and right to repair framing driving every decision. The four "why M3" claims, walked through with the build artifacts that demonstrate each one.</p>
+
+      <p class="muted"><strong>About the division of labor.</strong> M3 (via Hermes agent, through portal.nousresearch.com) did the synthesis: scaffolding the curriculum structure, drafting concept explanations, building the frontend code and logic, generating diagrams and references, drafting this process page. The owner did the editorial judgment, the agroecological and right to repair framing, the pedagogical sequencing, the real farm data, and the final framing. The pushback below is the part that matters — it is where the tool got sharper than what M3 would have produced alone.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Claim 1 — Domain translation</h2>
+      <p>M3 took the vocabulary of right to repair and the vocabulary of small-farm maintenance and turned both into a working tool, with neither reduced to the other.</p>
+
+      <h3>M3's first draft vs. the owner's revision</h3>
+      <div class="diff">
+        <div class="before">
+          <h5>M3 first draft</h5>
+          <p><em>Equipment Maintenance Tracker</em></p>
+          <p>"A simple tool to keep track of your equipment servicing and parts replacement."</p>
+        </div>
+        <div class="after">
+          <h5>Owner revision</h5>
+          <p><em>Equipment Maintenance Assistant — a right to repair artifact</em></p>
+          <p>"A tool that puts maintenance knowledge and scheduling in the operator's hands, makes it shareable, and decouples the farmer from OEM service contracts."</p>
+        </div>
+      </div>
+
+      <div class="annotation"><strong>Why the change.</strong> "Servicing" and "upkeep" are ag-software vocabulary. They reduce the work to a tracking problem. Right to repair vocabulary — <em>knowledge commons, operator sovereignty, OEM lockout, decouple from dealer service contracts</em> — frames the same work as a political and pedagogical project. The tool does the same thing either way. The vocabulary changes who the user thinks they are when they use it. They are not a customer of an ag-software product. They are an operator reclaiming maintenance knowledge from the OEM.</div>
+
+      <h3>How this shows up in the artifact</h3>
+      <p>Open the <a href="case-maintenance.html">case study</a> and look at the parts list. There are three sourcing columns: OEM, aftermarket, and <strong>source independently</strong>. The third column is the right to repair move made visible. It tells the operator: you do not have to go to the dealer. Yesterday's Tractors, Jensales, EV-conversion forums, hydraulic supply houses, farm supply co-ops — these are legitimate sources, and the tool says so. M3 would not have added that column by default. The owner asked for it because right to repair is partly about parts sovereignty, not just knowledge.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Claim 2 — Pedagogical scaffolding</h2>
+      <p>M3 produced a traceable process the user can read, modify, and learn from — so that vibe coding functions as popular education, not productivity hack.</p>
+
+      <h3>M3's first draft vs. the owner's revision</h3>
+      <div class="diff">
+        <div class="before">
+          <h5>M3 first draft (handoff doc template)</h5>
+          <p>"This machine is the [make] [model]. Engine: [engine]. Hours: [hours]. If something is wrong, call [operator]."</p>
+        </div>
+        <div class="after">
+          <h5>Owner revision (handoff doc, full version)</h5>
+          <p>"This machine is the [make] [model]. Engine: [engine]. Hours: [hours]. If something is wrong: 1) stop in a safe place, 2) note the conditions, 3) check the troubleshooting guide, 4) call the operator, 5) <em>log the issue in the maintenance log, even if minor</em>."</p>
+          <p>Closing line added: <em>"If you learn something about this machine, write it down. Update the troubleshooting guide. The next operator inherits your knowledge."</em></p>
+        </div>
+      </div>
+
+      <div class="annotation"><strong>Why the change.</strong> The numbered procedure is pedagogical structure: it makes the operator do the documentation work, not skip it. The closing line makes the right to repair principle into a directive: <em>leave the next operator better than you found the machine</em>. M3's first version was a phone-message template. The owner's revision is a popular education artifact — Paulo Freire's "the oppressed are their own example of liberation" applied to equipment maintenance.</div>
+
+      <h3>How this shows up in the artifact</h3>
+      <p>Look at the troubleshooting guide output. It is intentionally a <em>starter</em>, not a definitive reference. M3 generated the categories and starter causes. The owner added the instruction: "Add your own issues and fixes as you encounter them — that is what makes the guide grow with the operator's experience." That sentence is the pedagogical move. A static troubleshooting guide is a deliverable. A growing troubleshooting guide is a learning community in a JSON file.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Claim 3 — Sovereignty by design</h2>
+      <p>The tools M3 builds are static, file-based, open, and modifiable. The means of production — and maintenance — belong to the operator.</p>
+
+      <h3>M3's first draft vs. the owner's revision</h3>
+      <div class="diff">
+        <div class="before">
+          <h5>M3 first draft (storage approach)</h5>
+          <p>"Save the equipment list in localStorage so the user does not have to re-enter it on next visit. Use a CDN-loaded web font for performance. Add a Google Analytics tag to track which features get used."</p>
+        </div>
+        <div class="after">
+          <h5>Owner revision</h5>
+          <p>"No localStorage. The equipment list lives in a JSON file the farmer saves themselves, version-controls with git if they want, hands to a neighbor on a USB stick. No CDN dependencies that fail offline — Google Fonts is fine because the page is still readable without it, but the <em>tool itself</em> must work with the wifi off. No analytics. No tracking. No platform."</p>
+        </div>
+      </div>
+
+      <div class="annotation"><strong>Why the change.</strong> A farm shed does not have reliable internet. A farm shed in eastern Ontario in February has worse internet. Sovereignty means the tool works when the wifi does not — and it means the data is in a file the farmer can read, edit, and own. localStorage is convenient until the browser cache clears, then the data is gone. Analytics is opt-out by design, which means it is opt-in by manipulation. The owner's revision made the tool offline-capable and trust-by-default. The Google Fonts CDN load is the only remaining external dependency, and the page degrades gracefully without it (the system font fallback is fine).</div>
+
+      <h3>How this shows up in the artifact</h3>
+      <p>Look at the toolbar on the case study page. There is a <strong>Download JSON</strong> button. The data exits the page as a file, in a format the farmer controls. There is no upload path, no cloud sync, no account. The four color-state, font, and layout choices in style.css are all in one file, plain CSS, no preprocessor. Fork the repository, edit the JSON, redeploy. That is the whole loop.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Claim 4 — Customization at the edge</h2>
+      <p>A non-coder with M3 can build the maintenance tool that fits their equipment, at any scale, with no developer in the loop.</p>
+
+      <h3>M3's first draft vs. the owner's revision</h3>
+      <div class="diff">
+        <div class="before">
+          <h5>M3 first draft (service intervals)</h5>
+          <p>"Industry standard service intervals for compact tractors, utility vehicles, and compact excavators, based on aggregated manufacturer recommendations."</p>
+        </div>
+        <div class="after">
+          <h5>Owner revision</h5>
+          <p>"Service intervals are <em>starter templates</em> by category (tractor / utility / excavator). Each interval is editable in the JSON: hours, task, notes, and a DIY/dealer flag that says whether the operator can do it themselves. The 'industry standard' is the starting point, not the answer. The operator overrides per machine."</p>
+        </div>
+      </div>
+
+      <div class="annotation"><strong>Why the change.</strong> "Industry standard" intervals are written by people who do not run this farm, on this soil, in this climate, with this operator's mechanical skill set. A 5,335-hour Deere 1120 is not a new machine. Its intervals are not the same as a 500-hour Deere 1120. A 145-hour Polaris Ranger EV is essentially new; its lead-acid pack may need water before it needs a service. The tool's job is to surface the structure (what to think about) and let the operator make the call. M3's first draft treated intervals as facts. The owner's revision treated them as defaults the operator can override.</div>
+
+      <h3>How this shows up in the artifact</h3>
+      <p>Open the case study. The textarea on the case-maintenance page is the canonical equipment list, in JSON, fully editable. The 1967-1975 Deere, the 2022 electric UTV, and the 2021 Chinese-built excavator are three radically different machines with three different right to repair stories. The tool renders all three from the same form because the form is a structure, not a content. A farmer in Vermont with a 1998 Kubota and a farmer in Kenya with a hand plow can both use this form. They edit the JSON, the tool re-renders, and the output fits their equipment. No developer in the loop. No "industry standard" override.</p>
+    </section>
+
+    <hr class="fancy">
+
+    <section>
+      <h2>The build itself</h2>
+      <p>For the record, the build looked like this:</p>
+      <ol>
+        <li><strong>Framing chat</strong> — owner and M3 worked through the four claims, the right to repair sharpening, and the cut-line discipline. M3 drafted the case study structure; the owner revised the political framing.</li>
+        <li><strong>Style system</strong> — owner asked for "zine, not corporate"; M3 generated a stylesheet using Bitter and Work Sans with an earth-tone palette. Owner pushed back on a too-corporate ochre value; the second pass landed.</li>
+        <li><strong>Tool build</strong> — M3 generated the JSON data model, the service interval templates, the parts templates, and the troubleshooting templates. Owner added the DIY/dealer flag system, the source-independently column, and the "knowledge is a commons" closing line in the handoff doc.</li>
+        <li><strong>Real farm data</strong> — owner supplied the three machines from <code>~/farm-equipment/records/</code>: T1 (Deere 1120), UT1 (Polaris Ranger EV 2022), E1 (Sunward SWE18UF). The sawmill record was excluded — sparse data, not a primary workhorse.</li>
+        <li><strong>Process page</strong> — owner asked for the "M3 said X, I changed it to Y, because Z" pattern. M3 drafted the four diff sections; owner wrote the "Why the change" annotations. The annotations are the human contribution; the diffs are the model output.</li>
+        <li><strong>Submission post</strong> — drafted after the site was complete, so the post could point at real artifacts rather than promises.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>Vibe Coding for Agroecology</strong> — built by a farmer, with M3, in Almonte, Ontario. Static site, no framework, no SaaS. Fork it, edit it, host it on a thumb drive.</p>
+    <p><a href="case-maintenance.html">The case</a> · <a href="index.html">Index</a> · <a href="contribute.html">Build one for your farm</a></p>
+  </footer>
+</body>
+</html>

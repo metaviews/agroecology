@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Coding for Agroecology — Two Tools from a Working Farm</title>
+  <meta name="description" content="A farmer, an AI coding partner, and a right to repair ethos. Tools built end-to-end with M3 for a small farm in Almonte, Ontario.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="masthead">
+      <span class="issue">Volume 1</span> &nbsp;·&nbsp; M3 Showcase &nbsp;·&nbsp; Agroecology &nbsp;·&nbsp; Right to Repair
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html" aria-current="page">Index</a></li>
+        <li><a href="case-maintenance.html">The Case</a></li>
+        <li><a href="process.html">How it was built</a></li>
+        <li><a href="contribute.html">Build one for your farm</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h1>Vibe Coding for Agroecology
+        <span class="subhead">A farmer, an AI coding partner, and a right to repair ethos</span>
+      </h1>
+
+      <p class="lede">Most "AI for ag" tools are built by engineers for engineers. This project asks: what if a farmer could build their own tools, in their own context, with AI as a coding partner? M3 makes that possible. Here is a working case from a small farm near Almonte, Ontario.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>The claim</h2>
+      <p>M3 is not distinctive in agroecology because it generates code fast. It is distinctive because of four things, in this order:</p>
+
+      <div class="grid-asym">
+        <div class="card">
+          <h3>1. Domain translation</h3>
+          <p class="meta">Concept → structured tool</p>
+          <p>M3 takes agroecological and right to repair concepts — knowledge as commons, operator sovereignty, anti-lock-in, intergenerational knowledge transfer — and translates them into structured, working tools that non-coders can actually use. Other models can do this in pieces. M3 holds the whole arc: concept → structured intake → executable artifact.</p>
+        </div>
+
+        <div class="card">
+          <h3>2. Pedagogical scaffolding</h3>
+          <p class="meta">Teachable process, not just output</p>
+          <p>M3 does not just produce the tool. It produces a traceable process the user can read, modify, and learn from. This is what makes vibe coding a popular education practice (in the Freirian / agroecology tradition) rather than a productivity hack. The owner can hand the conversation log to a neighbor and say: <em>here is how I made this, you can do it too.</em></p>
+        </div>
+
+        <div class="card">
+          <h3>3. Sovereignty by design</h3>
+          <p class="meta">Local-first, no platform</p>
+          <p>The tools M3 builds are static, file-based, open, and modifiable. They do not lock the farmer into a platform. The equipment data is a JSON file the farmer can keep in git, on a USB stick, on a Raspberry Pi in a farm shed. This matches the agroecology and right to repair ethos: the means of production — and the means of maintenance — belong to the producer.</p>
+        </div>
+
+        <div class="card">
+          <h3>4. Customization at the edge</h3>
+          <p class="meta">Any equipment, any scale, any operator</p>
+          <p>A 1967-1975 John Deere with 5,335 hours and a 2022 electric UTV with 145 hours and a Chinese-built compact excavator with 64 hours are three radically different machines. The tool does not assume any of them. The JSON equipment list is the operator's list, in the operator's structure, edited in the operator's text editor. Generic ag software cannot do this. A non-coder with M3 can.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="fancy">
+
+    <section>
+      <h2>The case</h2>
+      <p>The Equipment Maintenance Assistant is a tool that turns a farmer's equipment list into a maintenance calendar, a parts list (with OEM and aftermarket sourcing), a troubleshooting guide, an operator handoff document, and a printable shop card. Each output is generated locally in the browser, from a JSON file the farmer owns.</p>
+      <p>The canonical demo uses three real machines from a working farm: a vintage John Deere 1120 tractor, a 2022 Polaris Ranger EV, and a 2021 Sunward SWE18UF excavator. The machine data lives in a JSON file. The tool renders outputs on demand. The farmer can edit the JSON, save it back to disk, version it with git, hand it to a neighbor.</p>
+      <p><a class="btn" href="case-maintenance.html">Open the case study &amp; tool →</a></p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>The fight this sits inside</h2>
+      <p>Right to repair in agriculture is not abstract and it is not new. In January 2023, John Deere signed a <a href="https://www.fb.org/news/john-deere-american-farm-bureau-sign-right-to-repair-mou">memorandum of understanding with the American Farm Bureau Federation</a> committing to expanded repair access for farmers — a direct response to years of organizing by <a href="https://pirg.org/campaigns/right-to-repair-for-all/">U.S. PIRG</a>, Repair.org, and farmer-led coalitions. Colorado passed an agricultural right to repair law in 2024. Minnesota and New York have passed consumer right to repair laws that touch equipment manufacturers. In Canada, <a href="https://www.parl.ca/legisinfo/en/bill/44-1/c-244">Bill C-244 (An Act to amend the Copyright Act)</a> is the federal right to repair vehicle, with active support from farmers, independent repair shops, and the open hardware community.</p>
+      <p>The Equipment Maintenance Assistant sits in the operational layer below these legal fights. The laws say farmers can repair. This tool says farmers can also document, share, and own the knowledge that goes with repair — without a platform, without an account, without a subscription. The means of maintenance, like the means of production, belong to the operator.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>How it was built</h2>
+      <p>This was not generated and posted. It was a working conversation between a farmer and M3, with real pushback, real revisions, and a real agroecological and right to repair framing driving every decision. The process page walks through the build: what M3 drafted, what the owner changed, and why.</p>
+      <p><a href="process.html">Read the process and the four-claim walkthrough →</a></p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Build one for your farm</h2>
+      <p>The whole site is static HTML, CSS, and a single JS file. No framework, no build step, no backend. Fork it, edit the equipment list, redeploy. The README explains the structure and the contribution path. The contribute page is where you tell us what you built and what the next case should be.</p>
+      <p><a href="contribute.html">Build one for your farm →</a></p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>Vibe Coding for Agroecology</strong> — built by a farmer, with M3, in Almonte, Ontario. Static site, no framework, no SaaS. Fork it, edit it, host it on a thumb drive.</p>
+    <p><a href="case-maintenance.html">The case</a> · <a href="process.html">How it was built</a> · <a href="contribute.html">Build one for your farm</a></p>
+  </footer>
+</body>
+</html>

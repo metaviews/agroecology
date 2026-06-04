@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Equipment Maintenance Case — Vibe Coding for Agroecology</title>
+  <meta name="description" content="A maintenance tool built by a farmer, for any farmer's equipment list, with right to repair built in. Built end-to-end with M3.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="wide">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="masthead">
+      <span class="issue">Case Study № 1</span> &nbsp;·&nbsp; Equipment Maintenance &nbsp;·&nbsp; Right to Repair
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="case-maintenance.html" aria-current="page">The Case</a></li>
+        <li><a href="process.html">How it was built</a></li>
+        <li><a href="contribute.html">Build one for your farm</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section class="case-intro">
+      <h1>The Equipment Maintenance Assistant
+        <span class="subhead">A working tool, a right to repair artifact, a teachable process</span>
+      </h1>
+
+      <p class="lede">Most farm equipment maintenance gets tracked on clipboards, in spreadsheets, or in someone's head. Service intervals get missed. Parts are forgotten. Knowledge walks off the farm when an operator leaves. Off-the-shelf ag software is built for industrial operations and ignores smallholders and microfarmers. So we built our own — a farmer can do that now, with M3 as a coding partner.</p>
+
+      <h2>The before</h2>
+      <p>The canonical demo uses three real machines from a working farm near Almonte, Ontario: a 1967-1975 vintage John Deere 1120 tractor (5,335 hours, no service history on file), a 2022 Polaris Ranger EV utility vehicle (145.2 hours, lead-acid battery pack of unknown age), and a 2021 Sunward SWE18UF excavator (64.2 hours, almost nothing recorded). All three are operational. None of them have anything more than a single recent hour-meter reading in their maintenance log.</p>
+      <p>That's the actual pain. The machines run. The data is missing. The risk is silent: a valve adjustment interval missed, a hydraulic filter forgotten, a battery pack with a weak cell you don't know about until you're stranded in a pasture. This is the world this tool is built for.</p>
+
+      <h2>What the tool does</h2>
+      <p>Paste in a JSON equipment list (or load the demo). The tool produces, for each machine:</p>
+      <ol>
+        <li><strong>A maintenance calendar</strong> keyed to that machine's service intervals, with DIY-able steps flagged separately from steps that need OEM tooling or a dealer.</li>
+        <li><strong>A parts list</strong> with OEM part numbers, aftermarket equivalents, generic specs, and a "source independently" column. The right to repair move is built in: nothing here forces you to the dealer.</li>
+        <li><strong>A troubleshooting guide</strong> with common problems, likely causes, and what to check — generated as a starter, editable, intended to grow with the operator's experience.</li>
+        <li><strong>A handoff document</strong> for new operators: machine identity, daily checks, safety notes, who to call. The artifact that keeps knowledge from walking off the farm.</li>
+        <li><strong>A printable laminated shop card</strong> per machine, sized for the wall above the workbench. The low-tech artifact that survives a power outage.</li>
+      </ol>
+      <p>The output is plain HTML, printed, or copied. No accounts, no logins, no SaaS. The JSON equipment list is the source of truth. The farmer owns it, the farmer edits it, the farmer hands the file to a neighbor.</p>
+    </section>
+
+    <section class="case-claims">
+      <h2>What M3 enabled here</h2>
+
+      <div class="claim"><strong>1. Domain translation.</strong> M3 took the vocabulary of right to repair (DRM, telematics, OEM lockout, knowledge commons, operator sovereignty) and the vocabulary of small-farm maintenance (grease intervals, valve clearances, hydraulic return filters) and turned both into a working tool with neither reduced to the other. The Deere's vintage openness, the Polaris's modern-but-DIY-friendly EV architecture, and the Sunward's geography-locked-not-DRM-locked situation are all distinct right to repair stories — the tool handles all three without flattening them.</div>
+
+      <div class="claim"><strong>2. Pedagogical scaffolding.</strong> The conversation that built this is readable. A neighbor can pick up the planning chat and the build log, see how a non-coder worked with M3, and run the same process for their own equipment. The intake format is a JSON file the operator can edit by hand. The handoff doc is meant to be read by the next operator. The tool itself teaches by showing its own structure.</div>
+
+      <div class="claim"><strong>3. Sovereignty by design.</strong> Static site, plain HTML/CSS/JS, no build step, no framework, no backend. The equipment data is a JSON file the farmer can keep in git, on a USB stick, in a farm-shed Raspberry Pi, or print and re-key. There is no platform. The means of production — and maintenance — belong to the operator.</div>
+
+      <div class="claim"><strong>4. Customization at the edge.</strong> A 1967-1975 Deere with 5,335 hours and a 2022 electric UTV with 145 hours and a Chinese-built compact excavator with 64 hours are three radically different machines. The tool does not assume any of them. The JSON equipment list is the operator's list, in the operator's structure, edited in the operator's text editor. M3 built the framework; the farmer builds the content.</div>
+    </section>
+
+    <hr class="fancy">
+
+    <section>
+      <h2>The tool</h2>
+      <p>Below is the working tool. The equipment list is pre-loaded with the three real machines from the Almonte farm. Edit the JSON, click <strong>Generate</strong>, and the outputs re-render. The JSON is yours to copy, edit, and re-use.</p>
+
+      <div class="intake no-print">
+        <label for="input">Equipment list (JSON)</label>
+        <p class="hint">Edit any field. The structure is documented in the file itself — start with the demo and modify.</p>
+        <textarea id="input" spellcheck="false" aria-describedby="input-hint"></textarea>
+        <p id="input-hint" class="hint">The same file you see here is the canonical demo. The Reset button restores it.</p>
+        <div class="toolbar">
+          <button id="generate" type="button">Generate outputs</button>
+          <button id="reset" type="button" class="ghost">Reset to demo</button>
+          <button id="download" type="button" class="ghost">Download JSON</button>
+          <button id="print" type="button" class="ghost">Print shop cards</button>
+        </div>
+        <p id="parse-error" class="hint" style="color: var(--color-warn); display: none;"></p>
+      </div>
+
+      <div id="outputs" aria-live="polite">
+        <noscript>
+          <div class="output">
+            <h3>JavaScript required</h3>
+            <p>The tool needs JavaScript to render outputs from the equipment list. The list above is still readable as the canonical demo data. With JS enabled, click <em>Generate outputs</em> to render the maintenance calendar, parts list, troubleshooting guide, handoff document, and shop cards.</p>
+          </div>
+        </noscript>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>Vibe Coding for Agroecology</strong> — built by a farmer, with M3, in Almonte, Ontario. Static site, no framework, no SaaS. Fork it, edit it, host it on a thumb drive.</p>
+    <p><a href="process.html">How it was built</a> · <a href="contribute.html">Build one for your farm</a> · <a href="index.html">Index</a></p>
+  </footer>
+
+  <script>
+  /* =========================================================
+     Equipment Maintenance Assistant — generator
+     Plain JS. No framework. Reads a JSON equipment list and
+     renders: maintenance calendar, parts list, troubleshooting
+     guide, handoff doc, and shop cards.
+     ========================================================= */
+
+  // --- Canonical demo: three real machines from the Almonte farm ---
+  const DEMO_JSON = {
+    "machines": [
+      {
+        "id": "T1",
+        "name": "John Deere 1120",
+        "category": "tractor",
+        "year": 1970,
+        "make": "John Deere",
+        "model": "1120",
+        "serial": "080856L",
+        "hours": 5335,
+        "engine": "John Deere 2.7L 3-cyl diesel, direct injection",
+        "fuel": "diesel",
+        "fuel_tank_l": 62.5,
+        "operator": "owner",
+        "diy_friendly": true,
+        "oem_locked": false,
+        "lock_notes": "Vintage era — no digital locks, no telematics, no proprietary diagnostic tool. Full manual, full parts ecosystem. The 'what right to repair could be' machine.",
+        "attachments": ["Front loader", "Snowblower", "Brush hog"],
+        "acquired": "Unknown",
+        "location": "Almonte, Ontario"
+      },
+      {
+        "id": "UT1",
+        "name": "Polaris Ranger EV (2022)",
+        "category": "utility",
+        "year": 2022,
+        "make": "Polaris",
+        "model": "Ranger EV",
+        "vin": "3NSMAAE42NE318098",
+        "hours": 145.2,
+        "engine": "Single 48V AC-induction, 30 hp",
+        "fuel": "electric (8x lead-acid)",
+        "battery": "8x lead-acid, 48V pack",
+        "operator": "owner",
+        "diy_friendly": true,
+        "oem_locked": true,
+        "lock_notes": "OEM parts through Polaris dealer network. Service manual download gated. BUT: lead-acid batteries are commodity (Trojan T-105 format); Curtis controller is well-documented in the EV-conversion community. The 'modern but still DIY-friendly' machine.",
+        "attachments": ["2 in receiver hitch"],
+        "acquired": "Unknown",
+        "location": "Almonte, Ontario"
+      },
+      {
+        "id": "E1",
+        "name": "Sunward SWE18UF",
+        "category": "excavator",
+        "year": 2021,
+        "make": "Sunward",
+        "model": "SWE18UF",
+        "serial": "SWE18UF00659",
+        "hours": 64.2,
+        "engine": "Yanmar 3TNV80F-SSSU, 18 hp, Tier 4 Final",
+        "fuel": "diesel",
+        "fuel_tank_l": 24.6,
+        "operator": "owner",
+        "diy_friendly": true,
+        "oem_locked": false,
+        "lock_notes": "No digital locks. The 'lock' is geography: North American support runs through one parts contact in Denton TX. Yanmar engine is a global commodity with a deep parts commons. The 'geography-locked rather than DRM-locked' machine.",
+        "attachments": ["16 ft GP bucket", "30 in clean-up bucket", "Hydraulic thumb", "Digga 1DDS mini excavator kit, 9 in auger bit"],
+        "acquired": "Unknown",
+        "location": "Almonte, Ontario"
+      }
+    ]
+  };
+
+  // --- Service interval templates by machine category ---
+  const INTERVALS = {
+    tractor: [
+      { task: "Engine oil + filter change",     every_hours: 100,  diy: true,  notes: "15W-40 diesel. Spin-on filter." },
+      { task: "Fuel filter change",             every_hours: 200,  diy: true,  notes: "Replace primary. Bleed fuel system after." },
+      { task: "Air filter inspection / change", every_hours: 200,  diy: true,  notes: "Blow out with compressed air between changes." },
+      { task: "Hydraulic filter change",        every_hours: 200,  diy: true,  notes: "Use OEM-spec hydraulic filter." },
+      { task: "Valve clearance check",          every_hours: 500,  diy: true,  notes: "Intake 0.014 in, exhaust 0.018 in. Cold engine." },
+      { task: "Transmission / hydraulic fluid", every_hours: 1000, diy: true,  notes: "Drain and refill. John Deere UTF or equivalent." },
+      { task: "Coolant flush and refill",       every_hours: 1000, diy: true,  notes: "Or every 2 years. Ethylene glycol based." },
+      { task: "Grease all fittings",            every_hours: 10,   diy: true,  notes: "Loader pins, 3-point, steering. Daily when working." },
+      { task: "Tire pressure check",            every_hours: 0,    diy: true,  interval_text: "Weekly",   notes: "Front 7.50-16, rear 13.6-36." },
+      { task: "Battery and terminal check",     every_hours: 0,    diy: true,  interval_text: "Monthly",  notes: "2x 12V. Clean terminals, check electrolyte." }
+    ],
+    utility: [
+      { task: "Battery pack voltage check",        every_hours: 0,  diy: true,  interval_text: "Monthly",    notes: "Check individual battery voltage. Replace as a set when one fails." },
+      { task: "Battery terminal cleaning",         every_hours: 0,  diy: true,  interval_text: "Quarterly",  notes: "Baking soda + water, wire brush, dielectric grease." },
+      { task: "Distilled water top-up (flooded)",  every_hours: 0,  diy: true,  interval_text: "Monthly",    notes: "Check electrolyte. Add distilled water only." },
+      { task: "Brake fluid check",                 every_hours: 0,  diy: true,  interval_text: "Annually",   notes: "DOT 3 or 4. Look for moisture and dark color." },
+      { task: "Tire pressure check",               every_hours: 0,  diy: true,  interval_text: "Monthly",    notes: "Carlisle 25x9-12. Per OEM spec on sidewall." },
+      { task: "Suspension inspection",             every_hours: 0,  diy: true,  interval_text: "Annually",   notes: "A-arm bushings, shock seals, CV boots." },
+      { task: "Charging cord inspection",          every_hours: 0,  diy: true,  interval_text: "Monthly",    notes: "Cracking, exposed wire, GFCI test." },
+      { task: "General fastener check",            every_hours: 50, diy: true,  notes: "Wheel lugs, body panels, brush guard mounts." },
+      { task: "Controller diagnostic (Curtis)",    every_hours: 0,  diy: "maybe", interval_text: "As fault codes appear", notes: "EV-conversion community has guides. Polaris dealer for warranty work." }
+    ],
+    excavator: [
+      { task: "Engine oil + filter change",         every_hours: 250,  diy: true,  notes: "10W-30 or 15W-40. ~1.3L capacity." },
+      { task: "Fuel filter change",                 every_hours: 500,  diy: true,  notes: "Primary and/or secondary per Yanmar." },
+      { task: "Air filter inspection / change",     every_hours: 250,  diy: true,  notes: "More often in dusty conditions." },
+      { task: "Hydraulic return filter",            every_hours: 250,  diy: true,  notes: "Critical. Restriction causes system overheating." },
+      { task: "Hydraulic tank fluid",               every_hours: 2000, diy: true,  notes: "ISO VG 46 or HM hydraulic oil. ~18.6L." },
+      { task: "Hydraulic oil sample",               every_hours: 500,  diy: false, notes: "Send to lab for analysis. Detects wear before failure." },
+      { task: "Coolant flush and refill",           every_hours: 2000, diy: true,  notes: "Or every 2 years. Long-life coolant." },
+      { task: "Grease all pins and bushings",       every_hours: 10,   diy: true,  notes: "Boom, arm, bucket, swing, blade, track tensioner. Daily when working." },
+      { task: "Track tension check",                every_hours: 50,   diy: true,  notes: "Sag spec: 0.5 to 1 in mid-span. Adjust with grease fitting." },
+      { task: "Bucket teeth and pins",              every_hours: 0,    diy: true,  interval_text: "As worn", notes: "Replace teeth when shoulders reach point. Grease pins daily." }
+    ]
+  };
+
+  // --- Parts list templates by category ---
+  const PARTS = {
+    tractor: [
+      { name: "Engine oil",          spec: "15W-40 diesel (CJ-4)",                qty: "6 qt per change",   oem: "John Deere TY22041 or equiv",  aftermarket: "Shell Rotella, Mobil Delvac", source: "Tractor supply, fleet store, bulk oil" },
+      { name: "Oil filter",          spec: "Spin-on, JD-equivalent",              qty: "1",                 oem: "John Deere T19034",            aftermarket: "Wix, Donaldson, Baldwin cross-refs", source: "Aftermarket filter cross-reference; vintage JD specialists" },
+      { name: "Fuel filter",         spec: "Inline or spin-on, per application",  qty: "1",                 oem: "John Deere AR86745",           aftermarket: "Wix, Mann, Hengst",        source: "Yesterday's Tractors, Jensales" },
+      { name: "Air filter (outer)",  spec: "Per application",                     qty: "1",                 oem: "John Deere AH76810 or equiv",  aftermarket: "Donaldson, Wix",          source: "Tractor supply, vintage dealers" },
+      { name: "Air filter (inner)",  spec: "Safety filter",                       qty: "1",                 oem: "Per outer filter",             aftermarket: "Match the outer",        source: "Same as outer" },
+      { name: "Hydraulic filter",    spec: "Per spec, 10 micron",                 qty: "1",                 oem: "John Deere AR75603 or equiv",  aftermarket: "Wix, Donaldson",          source: "Aftermarket, vintage JD suppliers" },
+      { name: "Hydraulic fluid",     spec: "John Deere UTF (or equiv)",           qty: "10 gal",            oem: "John Deere UTF",               aftermarket: "Universal trans-hydraulic (UTF)", source: "Bulk from farm supply, NOT OEM dealer only" },
+      { name: "Coolant",             spec: "Ethylene glycol, low silicate",       qty: "11 qt",             oem: "John Deere COOL-GARD II or equiv", aftermarket: "Peak, Shell, Prestone fleet", source: "Any farm supply" },
+      { name: "Grease",              spec: "Multi-purpose lithium #2",            qty: "As needed",         oem: "John Deere TY6333 or equiv",   aftermarket: "Any major brand",         source: "Bulk from farm supply" },
+      { name: "Battery",             spec: "Group 24, 12V (qty 2)",               qty: "2",                 oem: "John Deere TY21798 or equiv",  aftermarket: "Interstate, Napa, East Penn", source: "Battery supplier, NOT dealer-only" }
+    ],
+    utility: [
+      { name: "Battery (lead-acid)", spec: "6V or 8V deep-cycle, 48V pack total",  qty: "8",                 oem: "Polaris spec, Trojan T-105 format", aftermarket: "Trojan, US Battery, Crown", source: "Battery specialty supplier, NOT dealer" },
+      { name: "Distilled water",     spec: "For flooded lead-acid",               qty: "As needed",         oem: "N/A",                          aftermarket: "Any grocery / pharmacy",  source: "Local store" },
+      { name: "Brake fluid",         spec: "DOT 3 or 4",                          qty: "As needed",         oem: "Polaris spec",                 aftermarket: "Any major brand",         source: "Auto parts store" },
+      { name: "Tire (front/rear)",   spec: "Carlisle 25x9-12",                    qty: "4",                 oem: "Carlisle",                     aftermarket: "Kenda, Maxxis",           source: "UTV / ATV tire shop" },
+      { name: "Halogen headlight bulb", spec: "50W, H-series per spec",            qty: "2",                 oem: "Polaris",                      aftermarket: "Sylvania, Philips",       source: "Auto parts store" },
+      { name: "Fuses",               spec: "Mini-blade, per spec",                qty: "Assorted",          oem: "Polaris",                      aftermarket: "Bussmann, Littelfuse",    source: "Auto parts store" },
+      { name: "Curtis controller diagnostic cable", spec: "Curtis 1313-4331 or equiv", qty: "1",           oem: "Polaris dealer",               aftermarket: "Curtis Instruments direct, EV-conversion suppliers", source: "EV-conversion community (endless-sphere, DIY Electric Car forums)" }
+    ],
+    excavator: [
+      { name: "Engine oil",          spec: "10W-30 or 15W-40 (per Yanmar)",       qty: "1.3L per change",   oem: "Yanmar spec",                  aftermarket: "Shell Rotella, Mobil Delvac", source: "Farm supply, NOT Sunward dealer" },
+      { name: "Oil filter",          spec: "Per Yanmar 3TNV80",                   qty: "1",                 oem: "Yanmar 129150-35153 or equiv", aftermarket: "Wix, Donaldson cross-ref", source: "Aftermarket cross-reference" },
+      { name: "Fuel filter",         spec: "Per Yanmar",                          qty: "1",                 oem: "Yanmar spec",                  aftermarket: "Wix, Mann",               source: "Aftermarket" },
+      { name: "Air filter (outer)",  spec: "Per application",                     qty: "1",                 oem: "Sunward / Yanmar",             aftermarket: "Donaldson, Wix",          source: "Aftermarket" },
+      { name: "Air filter (inner)",  spec: "Safety filter",                       qty: "1",                 oem: "Match outer",                  aftermarket: "Match outer",             source: "Same as outer" },
+      { name: "Hydraulic return filter", spec: "Per spec",                       qty: "1",                 oem: "Sunward / Nachi",              aftermarket: "Wix, Donaldson, Hengst",  source: "Aftermarket hydraulic supplier" },
+      { name: "Hydraulic oil",       spec: "ISO VG 46 HM hydraulic",              qty: "18.6L tank",        oem: "Sunward spec",                 aftermarket: "Shell Tellus, Mobil DTE, Chevron", source: "Hydraulic supplier, NOT dealer" },
+      { name: "Coolant",             spec: "Long-life ethylene glycol",           qty: "Per spec",          oem: "Yanmar spec",                  aftermarket: "Peak, Shell",             source: "Farm supply" },
+      { name: "Grease",              spec: "Multi-purpose lithium #2",            qty: "As needed",         oem: "Sunward",                      aftermarket: "Any major brand",         source: "Bulk from farm supply" },
+      { name: "Bucket teeth and pins", spec: "Per bucket (e.g., 16 ft GP)",       qty: "Set",               oem: "Sunward",                      aftermarket: "Esco, Hensley, Pengo",    source: "Construction equipment supplier, NOT dealer" },
+      { name: "Track bolts / hardware", spec: "Per undercarriage",                qty: "As needed",         oem: "Sunward",                      aftermarket: "Grade 8 equivalent",     source: "Track / undercarriage specialist" }
+    ]
+  };
+
+  // --- Troubleshooting templates by category ---
+  const TROUBLESHOOTING = {
+    tractor: [
+      { problem: "Won't start", causes: [
+        "No fuel — check level, shutoff valve, fuel filter",
+        "Cold — glow plugs (if equipped), block heater",
+        "Weak battery — check voltage, terminals, ground strap",
+        "Starter — solenoid, connections, ground"
+      ]},
+      { problem: "Low power / rough running", causes: [
+        "Fuel restriction — clogged fuel filter, water in fuel",
+        "Air restriction — clogged air filter",
+        "Injection issue — see injection shop",
+        "Engine wear — compression test, blowby check"
+      ]},
+      { problem: "Hydraulics slow or weak", causes: [
+        "Low hydraulic fluid — check level with loader down",
+        "Clogged hydraulic filter",
+        "Internal leak — pump or cylinder",
+        "Wrong fluid spec"
+      ]},
+      { problem: "Overheating", causes: [
+        "Low coolant — check for leaks",
+        "Blocked radiator — clean debris, blow out fins",
+        "Stuck thermostat",
+        "Failed water pump"
+      ]}
+    ],
+    utility: [
+      { problem: "Won't move", causes: [
+        "Battery pack — check pack voltage, individual cell voltages",
+        "Controller fault — check diagnostic codes on dash",
+        "Parking brake engaged",
+        "Key / ignition cycle — turn off, wait 10 seconds, retry"
+      ]},
+      { problem: "Reduced range", causes: [
+        "Weak battery cell — load test, check individual voltages",
+        "Underinflated tires",
+        "Brake drag — check calipers",
+        "Cold weather — normal but verify battery state"
+      ]},
+      { problem: "No charging", causes: [
+        "GFCI tripped on outlet",
+        "Charging cord damage",
+        "On-board charger fault",
+        "Battery pack below minimum voltage (deep discharge)"
+      ]}
+    ],
+    excavator: [
+      { problem: "Won't start", causes: [
+        "Same as tractor — fuel, battery, cold start",
+        "Safety interlocks — seat switch, control lockout",
+        "Hydraulic pilot pressure not up",
+        "Engine safety start system active"
+      ]},
+      { problem: "Loss of power / slow functions", causes: [
+        "Fuel restriction",
+        "Air restriction",
+        "Hydraulic relief stuck",
+        "Engine overheat — check gauge",
+        "Hydraulic oil level low"
+      ]},
+      { problem: "Track tension issues", causes: [
+        "Undercarriage wear — track stretched",
+        "Grease cylinder leak",
+        "Idler or sprocket wear"
+      ]},
+      { problem: "Hydraulic drift / slow arm", causes: [
+        "Internal cylinder leak",
+        "Control valve spools worn",
+        "Low oil level",
+        "Wrong oil spec"
+      ]}
+    ]
+  };
+
+  // --- Daily checks per category (for handoff doc) ---
+  const DAILY_CHECKS = {
+    tractor: [
+      "Engine oil level",
+      "Coolant level",
+      "Hydraulic fluid level",
+      "Fuel level",
+      "Tire pressure and condition (visual)",
+      "Loader / attachment pins and hardware",
+      "Grease all fittings (when in use)",
+      "Walk-around for leaks"
+    ],
+    utility: [
+      "Battery pack voltage (dash gauge)",
+      "Tire pressure and condition",
+      "Charging cord (when not in use)",
+      "Lights and signals",
+      "Brake function (low-speed test)",
+      "Suspension / A-arm visual",
+      "Cab / brush guard mounts"
+    ],
+    excavator: [
+      "Engine oil level",
+      "Coolant level",
+      "Hydraulic oil level",
+      "Fuel level",
+      "Track tension",
+      "Bucket teeth and pins",
+      "Grease all pins and bushings (every 10 hours or daily)",
+      "Hydraulic lines (visual for leaks)",
+      "Boom / arm function (low-speed test)"
+    ]
+  };
+
+  // --- Safety notes per category ---
+  const SAFETY = {
+    tractor: [
+      "ROPS up, seatbelt on",
+      "Never start from the ground",
+      "Loader down before leaving seat",
+      "PPE: hearing protection, dust mask in dry conditions",
+      "Hot exhaust and coolant — let cool before service"
+    ],
+    utility: [
+      "Seatbelt on, cab doors latched",
+      "Stay on marked trails when possible",
+      "Speed limits posted — this is not a race vehicle",
+      "PPE: helmet, eye protection, gloves when appropriate",
+      "High-voltage battery — never open pack without training"
+    ],
+    excavator: [
+      "ROPS / canopy down only when necessary",
+      "Seatbelt on",
+      "Never swing over people",
+      "PPE: hard hat, steel-toe boots, hearing protection",
+      "Use spotter when visibility is restricted",
+      "Lower bucket before leaving cab",
+      "Hot surfaces — cool before service"
+    ]
+  };
+
+  // ============================================================
+  // Rendering
+  // ============================================================
+
+  function esc(s) {
+    if (s === null || s === undefined) return '';
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function diyBadge(v) {
+    if (v === true)  return '<span class="diy-yes" title="Owner can do this with standard tools">DIY</span>';
+    if (v === false) return '<span class="diy-no" title="Dealer or specialist recommended">Dealer</span>';
+    return '<span class="diy-maybe" title="Owner-doable with research, but not trivial">DIY+research</span>';
+  }
+
+  function intervalLabel(item) {
+    if (item.interval_text) return item.interval_text;
+    if (!item.every_hours)  return 'As needed';
+    return `Every ${item.every_hours} hrs`;
+  }
+
+  function renderCalendar(machine) {
+    const intervals = INTERVALS[machine.category] || [];
+    if (!intervals.length) {
+      return `<p class="muted">No service intervals defined for category "${esc(machine.category)}". Add a category like "tractor", "utility", or "excavator" to get a starter calendar.</p>`;
+    }
+    const rows = intervals.map(it => `
+      <tr>
+        <td>${esc(it.task)}</td>
+        <td>${esc(intervalLabel(it))}</td>
+        <td>${diyBadge(it.diy)}</td>
+        <td>${esc(it.notes)}</td>
+      </tr>
+    `).join('');
+    return `
+      <table>
+        <thead>
+          <tr><th>Task</th><th>Interval</th><th>DIY?</th><th>Notes</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderParts(machine) {
+    const parts = PARTS[machine.category] || [];
+    if (!parts.length) {
+      return `<p class="muted">No parts list defined for category "${esc(machine.category)}".</p>`;
+    }
+    const rows = parts.map(p => `
+      <tr>
+        <td><strong>${esc(p.name)}</strong></td>
+        <td>${esc(p.spec)}</td>
+        <td>${esc(p.qty)}</td>
+        <td>${esc(p.oem)}</td>
+        <td>${esc(p.aftermarket)}</td>
+        <td>${esc(p.source)}</td>
+      </tr>
+    `).join('');
+    return `
+      <table>
+        <thead>
+          <tr>
+            <th>Part</th><th>Spec</th><th>Qty</th>
+            <th>OEM</th><th>Aftermarket</th><th>Source independently</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <p class="hint">OEM part numbers are starting points. Cross-reference at the dealer or via vintage / aftermarket parts services. The "source independently" column is the right to repair move: nothing here forces the dealer.</p>
+    `;
+  }
+
+  function renderTroubleshooting(machine) {
+    const t = TROUBLESHOOTING[machine.category] || [];
+    if (!t.length) {
+      return `<p class="muted">No troubleshooting guide defined for category "${esc(machine.category)}".</p>`;
+    }
+    const html = t.map(item => `
+      <h4>${esc(item.problem)}</h4>
+      <ul>${item.causes.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+    `).join('');
+    return html + `<p class="hint">Starter guide. Add your own issues and fixes as you encounter them — that's what makes the guide grow with the operator's experience.</p>`;
+  }
+
+  function renderHandoff(machine) {
+    const daily = DAILY_CHECKS[machine.category] || [];
+    const safety = SAFETY[machine.category] || [];
+    const md =
+`# ${machine.name} — Operator Handoff
+
+## Identity
+- Make / Model: ${machine.make} ${machine.model}
+- Year: ${machine.year || 'Unknown'}
+- Serial / VIN: ${machine.serial || machine.vin || 'Unknown'}
+- ID: ${machine.id}
+- Location: ${machine.location || 'Unknown'}
+- Acquired: ${machine.acquired || 'Unknown'}
+
+## Operating
+- Engine: ${machine.engine || 'N/A'}
+- Fuel: ${machine.fuel || 'N/A'}
+- Current hours: ${machine.hours ?? 'Unknown'}
+- Operator: ${machine.operator || 'Owner'}
+- Attachments: ${(machine.attachments || []).join(', ') || 'None'}
+
+## Right to repair note
+${machine.lock_notes || 'No right to repair concerns noted.'}
+
+## Daily checks
+${daily.map(c => `- ${c}`).join('\n')}
+
+## Safety
+${safety.map(s => `- ${s}`).join('\n')}
+
+## If something is wrong
+1. Stop the machine in a safe place.
+2. Note the conditions: weather, load, recent work, fault codes.
+3. Check the troubleshooting guide in the case-maintenance.html output.
+4. Call the operator listed above.
+5. Log the issue in the maintenance log, even if minor.
+
+## Knowledge is a commons
+If you learn something about this machine, write it down. Update the troubleshooting guide. The next operator inherits your knowledge.`;
+    return `
+      <pre style="white-space: pre-wrap; font-family: var(--font-mono); font-size: 0.86rem; background: var(--color-cream); padding: 0.9rem; border: var(--rule);">${esc(md)}</pre>
+      <p class="hint">Copy this into a file, print it, or hand it to the new operator. The "knowledge is a commons" line at the bottom is the right to repair principle made into a directive: leave the next operator better than you found the machine.</p>
+    `;
+  }
+
+  function renderShopCard(machine) {
+    const intervals = (INTERVALS[machine.category] || []).slice(0, 6);
+    const daily = (DAILY_CHECKS[machine.category] || []).slice(0, 6);
+    const safety = (SAFETY[machine.category] || []).slice(0, 4);
+    return `
+      <div class="shop-card">
+        <h5>${esc(machine.name)} <span style="font-family: var(--font-mono); font-size: 0.75rem; font-weight: 400;">[${esc(machine.id)}]</span></h5>
+        <dl>
+          <dt>Make / Model</dt><dd>${esc(machine.make)} ${esc(machine.model)} (${esc(machine.year || 'n/a')})</dd>
+          <dt>Serial / VIN</dt><dd>${esc(machine.serial || machine.vin || '—')}</dd>
+          <dt>Hours</dt><dd>${esc(machine.hours ?? '—')}</dd>
+          <dt>Fuel</dt><dd>${esc(machine.fuel || '—')}</dd>
+          <dt>Engine</dt><dd>${esc(machine.engine || '—')}</dd>
+          <dt>Operator</dt><dd>${esc(machine.operator || '—')}</dd>
+        </dl>
+        <div class="specs-block">
+          <strong>Daily checks:</strong>
+          <ul style="margin: 0.2rem 0 0.4rem 1.2rem;">${daily.map(d => `<li>${esc(d)}</li>`).join('')}</ul>
+          <strong>Top service intervals:</strong>
+          <ul style="margin: 0.2rem 0 0.4rem 1.2rem;">${intervals.map(i => `<li>${esc(i.task)} — ${esc(intervalLabel(i))}</li>`).join('')}</ul>
+          <strong>Safety:</strong>
+          <ul style="margin: 0.2rem 0 0 1.2rem;">${safety.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
+        </div>
+        <p style="margin-top: 0.4rem; font-size: 0.7rem; font-style: italic;">Right to repair: ${esc(machine.lock_notes ? 'see handoff doc' : 'no concerns noted')}.</p>
+      </div>
+    `;
+  }
+
+  function renderMachine(machine) {
+    return `
+      <div class="output">
+        <div class="machine-header">
+          <h4>${esc(machine.name)}</h4>
+          <span class="id">[${esc(machine.id)}] &middot; ${esc(machine.category)} &middot; ${esc(machine.hours ?? '—')} hrs &middot; ${esc(machine.fuel || '—')}</span>
+        </div>
+        <p class="hint">${esc(machine.lock_notes || '')}</p>
+
+        <h3>Maintenance calendar</h3>
+        ${renderCalendar(machine)}
+
+        <h3>Parts list</h3>
+        ${renderParts(machine)}
+
+        <h3>Troubleshooting guide</h3>
+        ${renderTroubleshooting(machine)}
+
+        <h3>Operator handoff document</h3>
+        ${renderHandoff(machine)}
+      </div>
+
+      <div class="output">
+        <h3>Shop card (print and laminate)
+          <span class="actions"><a href="#" onclick="window.print(); return false;">Print all cards</a></span>
+        </h3>
+        <p class="hint">One card per machine. Sized for an 8.5×11 sheet trimmed down. Print on cardstock and laminate for the shop wall.</p>
+        ${renderShopCard(machine)}
+      </div>
+    `;
+  }
+
+  function renderAll(machines) {
+    const root = document.getElementById('outputs');
+    if (!machines || !Array.isArray(machines) || machines.length === 0) {
+      root.innerHTML = `<div class="output"><h3>No machines</h3><p>The equipment list parsed, but no machines were found. Add a "machines" array with at least one entry.</p></div>`;
+      return;
+    }
+    root.innerHTML = machines.map(renderMachine).join('');
+  }
+
+  // --- Wire up the buttons ---
+  const inputEl = document.getElementById('input');
+  const errEl = document.getElementById('parse-error');
+
+  function loadDemo() {
+    inputEl.value = JSON.stringify(DEMO_JSON, null, 2);
+    errEl.style.display = 'none';
+    renderAll(DEMO_JSON.machines);
+  }
+
+  function tryParse() {
+    try {
+      const parsed = JSON.parse(inputEl.value);
+      if (!parsed.machines || !Array.isArray(parsed.machines)) {
+        throw new Error('JSON must have a top-level "machines" array.');
+      }
+      errEl.style.display = 'none';
+      renderAll(parsed.machines);
+    } catch (e) {
+      errEl.textContent = 'Could not parse: ' + e.message;
+      errEl.style.display = 'block';
+    }
+  }
+
+  function downloadJson() {
+    const blob = new Blob([inputEl.value], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'equipment-list.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  document.getElementById('generate').addEventListener('click', tryParse);
+  document.getElementById('reset').addEventListener('click', loadDemo);
+  document.getElementById('download').addEventListener('click', downloadJson);
+  document.getElementById('print').addEventListener('click', () => window.print());
+
+  // Auto-load the demo on page load
+  loadDemo();
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Build one for your farm — Vibe Coding for Agroecology</title>
+  <meta name="description" content="How to fork this site, edit the equipment list, redeploy, and what other farm tools could be built with M3 next.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header>
+    <div class="masthead">
+      <span class="issue">Contribute</span> &nbsp;·&nbsp; Fork, edit, redeploy &nbsp;·&nbsp; The next case
+    </div>
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Index</a></li>
+        <li><a href="case-maintenance.html">The Case</a></li>
+        <li><a href="process.html">How it was built</a></li>
+        <li><a href="contribute.html" aria-current="page">Build one for your farm</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <section>
+      <h1>Build one for your farm
+        <span class="subhead">Fork, edit the JSON, redeploy. That is the whole loop.</span>
+      </h1>
+
+      <p class="lede">This site is a static folder of HTML, CSS, and one JavaScript file. No framework, no build step, no backend, no SaaS. The equipment list is a JSON file. The tool renders outputs from it in the browser. The whole site is yours the moment you copy the folder.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Three ways to run it locally</h2>
+
+      <h3>1. Open the file in a browser</h3>
+      <p>Download the folder, double-click <code>index.html</code>. The site opens in your default browser. The case study works. The maintenance tool works. You are done.</p>
+
+      <h3>2. Edit the equipment list and reload</h3>
+      <p>Open <code>case-maintenance.html</code> in a text editor (Notepad, TextEdit, vim, whatever you have). Find the <code>DEMO_JSON</code> near the top of the <code>&lt;script&gt;</code> block. Replace the three machines with yours. Save. Reload. The outputs re-render with your data. The <strong>Download JSON</strong> button on the page lets you save your edited list as a separate file for safekeeping.</p>
+
+      <h3>3. Host it on a USB stick in a farm shed</h3>
+      <p>Copy the folder onto a USB stick. Plug it into any computer with a browser. Open <code>index.html</code>. The site works offline. The Google Fonts load will fail (and degrade gracefully to system fonts), but everything else is local. This is the right to repair move: the tool works when the wifi does not.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>What the folder looks like</h2>
+      <pre style="font-family: var(--font-mono); font-size: 0.85rem; background: var(--color-cream); padding: 0.9rem; border: var(--rule); white-space: pre-wrap; overflow-wrap: anywhere;">vibe-coding-agroecology/
+├── index.html              ← the framing page
+├── case-maintenance.html   ← the case study and the tool
+├── process.html            ← how M3 and the owner built this
+├── contribute.html         ← this page
+├── style.css               ← one stylesheet, zine aesthetic
+├── README.md               ← license, structure, contributing
+└── equipment-list.json     ← the canonical equipment data (optional, or inline)</pre>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>What to change first</h2>
+      <p>If you are forking this for your own farm, the order of edits is roughly:</p>
+      <ol>
+        <li><strong>Replace the three machines in the DEMO_JSON</strong> with yours. Edit the values, keep the structure.</li>
+        <li><strong>Adjust the service interval templates</strong> in the <code>INTERVALS</code> object if your machines need different schedules. The categories are <code>tractor</code>, <code>utility</code>, and <code>excavator</code> — add yours if you have a different machine type.</li>
+        <li><strong>Edit the parts templates</strong> in the <code>PARTS</code> object to match the actual fluids, filters, and consumables you use.</li>
+        <li><strong>Edit the masthead</strong> in <code>index.html</code>, <code>case-maintenance.html</code>, <code>process.html</code>, and <code>contribute.html</code> to your own farm name, location, and edition number.</li>
+        <li><strong>Replace the styling</strong> in <code>style.css</code> if you want. The variables at the top (<code>--color-terracotta</code>, <code>--color-ochre</code>, etc.) are the only things you need to change for a different palette.</li>
+      </ol>
+      <p>You do not need to understand the JavaScript to use the tool. The JSON structure is documented in the file itself. Start with the demo and modify.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>What's next</h2>
+      <p>Cases that could be built with M3 next, using the same structure (zine aesthetic, plain HTML, file-based, no SaaS):</p>
+      <ul>
+        <li><strong>Companion planting planner</strong> — a tool for intercropping layouts and succession timing, with the agroecological framing of polyculture vs. monoculture made visible in the output.</li>
+        <li><strong>Soil amendment log</strong> — track compost, lime, manure, cover crop rotations, and pH/OM trends across seasons. The data is a JSON file. The chart is generated in the browser.</li>
+        <li><strong>Seed starting and succession calendar</strong> — frost dates, last/first frost windows, succession intervals. Operator-specific, farm-specific.</li>
+        <li><strong>Pasture / grazing rotation planner</strong> — paddock sizes, rest periods, stocking density. Useful for silvopasture and rotational grazing operations.</li>
+        <li><strong>Compost facility log</strong> — for food waste diversion operations (grocery store diversion, on-farm composting). C:N ratios, temperatures, turn schedule.</li>
+        <li><strong>Farm map / plot layout</strong> — annotated SVG of fields, plots, infrastructure. Static file, no GIS platform.</li>
+        <li><strong>Cost-of-ownership tracker</strong> — purchase price, fuel, maintenance, repairs, residual value. Useful for right to repair advocacy: the data shows the OEM service cost vs. the operator-maintained cost.</li>
+      </ul>
+      <p>The framing is the same for all of them: concept → structured intake → executable artifact, with the agroecological and right to repair vocabulary intact in the output.</p>
+    </section>
+
+    <hr>
+
+    <section>
+      <h2>Tell us what you built</h2>
+      <p>The honest feedback path is the GitHub Issues page for this project. Open an issue titled with your farm name and the tool you built. Include: your equipment list (or whatever data structure you used), what you changed from the demo, and what the tool enabled for you that the off-the-shelf ag software did not.</p>
+      <p>There is no analytics on this site, no newsletter signup, no SaaS feedback form. Sovereignty by design means the feedback loop is on the farmer's terms, not the platform's.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p><strong>Vibe Coding for Agroecology</strong> — built by a farmer, with M3, in Almonte, Ontario. Static site, no framework, no SaaS. Fork it, edit it, host it on a thumb drive.</p>
+    <p><a href="case-maintenance.html">The case</a> · <a href="process.html">How it was built</a> · <a href="index.html">Index</a></p>
+  </footer>
+</body>
+</html>
